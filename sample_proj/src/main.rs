@@ -5,7 +5,7 @@ use diesel::mysql::MysqlConnection;
 use diesel::prelude::*;
 use diesel::sql_query;
 
-use chrono::{Utc, Local, DateTime, Date};
+use chrono::{NaiveDateTime};
 
 mod utils;
 
@@ -17,7 +17,8 @@ pub struct Memos {
         name: String,
         comment: String,
         //time: String,
-        time: DateTime<Utc>,
+        //time: DateTime<Utc>,
+        time: NaiveDateTime,
 
 }
 
@@ -27,7 +28,7 @@ impl QueryableByName<DB> for Memos {
                          id:      row.get("id")?,
                          name:    row.get("name")?,
                          comment: row.get("comment")?,
-                         time:    row.get("time")?,
+                         time:    row.get::<diesel::mysql::types::Datetime, _>("time")?,
                      }
               )
         }
