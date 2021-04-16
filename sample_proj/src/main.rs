@@ -17,7 +17,7 @@ pub struct Memos {
         name: String,
         comment: String,
         //time: String,
-        time: utc_datetime,
+        time: DateTime<Utc>,
 
 }
 
